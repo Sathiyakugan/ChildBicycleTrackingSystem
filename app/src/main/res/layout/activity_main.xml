@@ -13,9 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
+        android:layout_marginBottom="13dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="61dp" />
 
     <Button
         android:id="@+id/Home"
@@ -25,4 +26,13 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="11dp"
         android:text="Home" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/button"
+        android:layout_marginEnd="73dp"
+        android:text="Button" />
 </RelativeLayout>
