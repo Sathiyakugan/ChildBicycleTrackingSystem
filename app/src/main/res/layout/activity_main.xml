@@ -22,10 +22,11 @@
         android:id="@+id/Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button"
+        android:layout_marginTop="18dp"
+        android:text="Home"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="11dp"
-        android:text="Home" />
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_toStartOf="@+id/button2" />
 
     <Button
         android:id="@+id/button2"
