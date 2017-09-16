@@ -63,7 +63,6 @@ public class Main_Menu extends AppCompatActivity
         mUserDesc= (TextView)header.findViewById(R.id.userDesc);
         muserProfile= (ImageView)header.findViewById(R.id.userProfile);
 
-
         setProfile();
 
         mSetLocationButton.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +119,14 @@ public class Main_Menu extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            return true;
+        }
+        else if (id == R.id.signOut) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent =new Intent(Main_Menu.this,MainActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
