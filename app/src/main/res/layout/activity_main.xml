@@ -7,7 +7,7 @@
     android:paddingTop="56dp"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:background="@color/colorAccent"
+    android:background="@color/user_icon_5"
     android:weightSum="1">
 
     <ImageView android:src="@drawable/logo"

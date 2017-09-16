@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "199036052182",
+    "firebase_url": "https://childbicycletrackingsyst-4bd6b.firebaseio.com",
+    "project_id": "childbicycletrackingsyst-4bd6b",
+    "storage_bucket": "childbicycletrackingsyst-4bd6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199036052182:android:0a71fbc4d486d15a",
+        "android_client_info": {
+          "package_name": "com.blogspot.gihanmora.childbicycletrackingsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199036052182-5useorh6aevbueidie0s1uuo75rp0np8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blogspot.gihanmora.childbicycletrackingsystem",
+            "certificate_hash": "77228f9e6c7cc9ee416f11dc83b77b15ab531c80"
+          }
+        },
+        {
+          "client_id": "199036052182-rjgo4e3fipgu7rc1gqm3ga8judm9ks4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOJHQ0ifadoFjyq0j5VQTQBJzM_xb1M44"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199036052182-rjgo4e3fipgu7rc1gqm3ga8judm9ks4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
