@@ -24,8 +24,9 @@ import com.squareup.picasso.Picasso;
 
 public class Main_Menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MainMenu";
     private ImageButton mSetLocationButton ;
-    private ImageView mProfile;
+    private ImageView muserProfile;
     private TextView mUsername;
     private  TextView mUserDesc;
     private FirebaseAuth mFirebaseAuth;
@@ -56,9 +57,13 @@ public class Main_Menu extends AppCompatActivity
         mFirebaseAuth = FirebaseAuth.getInstance();
         View header = navigationView.getHeaderView(0);
         mSetLocationButton= (ImageButton)findViewById(R.id.setLocation);
+
+
         mUsername= (TextView)header.findViewById(R.id.user_Name);
         mUserDesc= (TextView)header.findViewById(R.id.userDesc);
-        mProfile= (ImageView)header.findViewById(R.id.profile);
+        muserProfile= (ImageView)header.findViewById(R.id.userProfile);
+
+
         setProfile();
 
         mSetLocationButton.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +85,10 @@ public class Main_Menu extends AppCompatActivity
             String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
             mUsername.setText(userName);
             mUserDesc.setText(userEmail);
+            muserProfile.setImageResource(R.drawable.avathar);
             if (userImage != null) {
                 String imageUri = userImage.toString();
-                Picasso.with(this).load(imageUri).into(mProfile);
+                Picasso.with(this).load(imageUri).into(muserProfile);
             }
         }
 
