@@ -14,7 +14,7 @@
     <string name="fall">Fall</string>
     <string name="title_activity_set_location">Map</string>
     <string name="title_activity_maim_menu2">MaimMenu2</string>
-
+    <string name="redircting">Redirecting...</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
