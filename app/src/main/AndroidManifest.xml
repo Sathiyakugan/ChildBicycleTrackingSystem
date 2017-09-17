@@ -39,11 +39,12 @@
 
         <activity
             android:name=".SetLocation"
-            android:label="@string/title_activity_set_location" />
+            android:label="@string/title_activity_set_location"
+            android:theme="@style/AppTheme.Teal" />
         <activity
             android:name=".Main_Menu"
             android:label="@string/title_activity_main__menu"
-            android:theme="@style/AppTheme.Teal"></activity>
+            android:theme="@style/AppTheme.Teal" />
     </application>
 
 </manifest>
