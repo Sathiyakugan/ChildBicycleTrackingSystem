@@ -25,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -42,13 +41,9 @@
             android:name=".SetLocation"
             android:label="@string/title_activity_set_location" />
         <activity
-            android:name=".MaimMenu"
-            android:label="@string/title_activity_maim_menu2"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Main_Menu"
             android:label="@string/title_activity_main__menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.Teal"></activity>
     </application>
 
 </manifest>
