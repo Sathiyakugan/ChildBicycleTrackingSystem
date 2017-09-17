@@ -2,6 +2,7 @@ package com.blogspot.gihanmora.childbicycletrackingsystem;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,9 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -23,8 +28,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SetLocation extends AppCompatActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     protected static final String TAG = "Customer Map Activity";
@@ -35,6 +48,8 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
     private GoogleMap mMap;
     private SeekBar seek_bar;
     private TextView text_view_radius;
+    private Button mLocationSetButton;
+    private Circle circle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +61,36 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        setLocationButton();
         setseekbar( );
+
+    }
+
+    private void setLocationButton() {
+        mLocationSetButton=(Button)findViewById(R.id.setlocationbtn);
+        mLocationSetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Marker marker = null;
+                MarkerOptions markerOptions;
+                if(marker!=null){
+                    marker.remove();
+                }
+                String userID= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("customerLocation");
+                GeoFire geofire = new GeoFire(ref);
+                mMyLocation=new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+                geofire.setLocation(userID,new GeoLocation(mLastLocation.getLatitude(),mLastLocation.getLongitude()));
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.eye);
+                markerOptions = new MarkerOptions().position(mMyLocation)
+                        .title("Current Location")
+                        .snippet("Thinking of finding some thing...")
+                        .icon(icon);
+                mMap.addMarker(markerOptions);
+//                mLocationSetButton.setText("Getting your Driver..");
+
+            }
+        });
 
     }
 
@@ -64,6 +107,8 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         progress_value = progress;
                         text_view_radius.setText("" + progress+"KM");
+                        // Drawing circle on the map
+                        drawCircle(mMyLocation,progress);
                     }
 
                     @Override
@@ -78,6 +123,25 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         );
 
     }
+
+    private void drawCircle(LatLng point,int radius){
+        if(circle!=null){
+            circle.remove();
+
+        }
+        // Instantiating CircleOptions to draw a circle around the marker,
+        // Specifying the center of the circle
+        // Radius of the circle
+        // Border color of the circle
+        // Fill color of the circle
+        // Border width of the circle
+        // Adding the circle to the GoogleMap
+        circle=mMap.addCircle(new CircleOptions().center(point).radius(radius).strokeColor(Color.BLACK).fillColor(0x30ff0000).strokeWidth(2));
+
+    }
+
+
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -145,7 +209,7 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         // Creating a LatLng object for the current location
         LatLng latLng= new LatLng(location.getLatitude(),location.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
     }
 
     /**
