@@ -209,7 +209,7 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         // Creating a LatLng object for the current location
         LatLng latLng= new LatLng(location.getLatitude(),location.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
     }
 
     /**

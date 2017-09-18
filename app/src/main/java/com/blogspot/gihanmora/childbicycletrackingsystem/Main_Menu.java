@@ -26,6 +26,7 @@ public class Main_Menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainMenu";
     private ImageButton mSetLocationButton ;
+    private  ImageButton mSetSpeedButton;
     private ImageView muserProfile;
     private TextView mUsername;
     private  TextView mUserDesc;
@@ -57,7 +58,7 @@ public class Main_Menu extends AppCompatActivity
         mFirebaseAuth = FirebaseAuth.getInstance();
         View header = navigationView.getHeaderView(0);
         mSetLocationButton= (ImageButton)findViewById(R.id.setLocation);
-
+        mSetSpeedButton= (ImageButton)findViewById(R.id.setspeed);
 
         mUsername= (TextView)header.findViewById(R.id.user_Name);
         mUserDesc= (TextView)header.findViewById(R.id.userDesc);
@@ -69,6 +70,15 @@ public class Main_Menu extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(Main_Menu.this,SetLocation.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        mSetSpeedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(Main_Menu.this,speed_changer.class);
                 startActivity(intent);
                 finish();
             }
