@@ -17,8 +17,7 @@ public class speed_changer extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         picker= (HoloCircleSeekBar) findViewById(R.id.picker);
-        picker.getValue();
-
+        picker.setValue(90);
         picker.setOnSeekBarChangeListener(new HoloCircleSeekBar.OnCircleSeekBarChangeListener() {
             @Override
             public void onProgressChanged(HoloCircleSeekBar holoCircleSeekBar, int i, boolean b) {
