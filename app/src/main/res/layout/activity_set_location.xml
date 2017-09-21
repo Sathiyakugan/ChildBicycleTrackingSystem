@@ -80,7 +80,6 @@
                         android:textAlignment="center"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
-
                     <Button
                         android:id="@+id/SpeedIndicator"
                         style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
