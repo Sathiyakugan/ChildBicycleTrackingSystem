@@ -81,12 +81,6 @@
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
 
-                    <com.nightonke.boommenu.BoomMenuButton
-                        android:id="@+id/bmb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-
                     <Button
                         android:id="@+id/SpeedIndicator"
                         style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
