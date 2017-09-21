@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void onSignedInInitialize(String username) {
         mUsername = username;
         addDrtailsToDatabase();
-        Intent intent =new Intent(MainActivity.this,Main_Menu.class);
+        Intent intent =new Intent(MainActivity.this,SetLocation.class);
         startActivity(intent);
         finish();
         return;
@@ -110,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
         String userID=mFirebaseAuth.getCurrentUser().getUid();
         String userName=mFirebaseAuth.getCurrentUser().getDisplayName();
         String userEmail=mFirebaseAuth.getCurrentUser().getEmail();
-        mUserDatabaseReference = mFirebaseDatabase.getReference().child("Users").child("Customers").child(userID);
-        mUserDatabaseReference.setValue(true);
+        mUserDatabaseReference = mFirebaseDatabase.getReference().child("Customer").child(userID).child("id");
+        mUserDatabaseReference.setValue(userID);
+        DatabaseReference mUserDatabaseReference1 = mFirebaseDatabase.getReference().child("Customer").child(userID).child("Speed");
+        mUserDatabaseReference1.setValue(20);
     }
 
     private void onSignedOutCleanup() {

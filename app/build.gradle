@@ -58,11 +58,12 @@ dependencies {
     compile 'com.firebase:geofire-android:2.1.1'
     compile 'com.firebaseui:firebase-ui-auth:0.6.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.dualcores.swagpoints:swagpoints:1.0.2'
-    testCompile 'junit:junit:4.12'
-
     compile 'com.github.JesusM:HoloCircleSeekBar:v2.2.2'
+    compile 'com.github.anastr:speedviewlib:1.1.6'
+    testCompile 'junit:junit:4.12'
+    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
 }
+
 
 
 

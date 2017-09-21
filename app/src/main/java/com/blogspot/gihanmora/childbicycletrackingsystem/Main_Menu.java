@@ -56,8 +56,9 @@ public class Main_Menu extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        mFirebaseAuth = FirebaseAuth.getInstance();
+
         View header = navigationView.getHeaderView(0);
+        mFirebaseAuth = FirebaseAuth.getInstance();
         mSetLocationButton= (ImageButton)findViewById(R.id.setLocation);
         mSetSpeedButton= (ImageButton)findViewById(R.id.setspeed);
 

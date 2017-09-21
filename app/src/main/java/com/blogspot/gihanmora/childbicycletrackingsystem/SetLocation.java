@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -38,8 +40,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
-public class SetLocation extends AppCompatActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+public class SetLocation extends AppCompatActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener ,GoogleMap.OnMarkerDragListener,GoogleMap.OnMapLongClickListener,GoogleMap.OnMapClickListener {
     protected static final String TAG = "Customer Map Activity";
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
@@ -50,6 +55,12 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
     private TextView text_view_radius;
     private Button mLocationSetButton;
     private Circle circle;
+    private Marker marker;
+    private Marker mMarkerInitial;
+    private int mCircleRadius=10;
+    private Button mButtonSpeedIndicator;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +71,38 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // in Activity Context
+        ImageView icon = new ImageView(this); // Create an icon
+        icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_drawer));
+
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this)
+                .setContentView(icon)
+                .build();
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+// repeat many times:
+        ImageView itemIcon = new ImageView(this);
+        itemIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_drawer));
+        SubActionButton button1 = itemBuilder.setContentView(itemIcon).build();
+        SubActionButton button2 = itemBuilder.setContentView(itemIcon).build();
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(button1)
+                .addSubActionView(button2)
+                // ...
+                .attachTo(actionButton)
+                .build();
+
+        mButtonSpeedIndicator= (Button) findViewById(R.id.SpeedIndicator);
+        mButtonSpeedIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(SetLocation.this,SpeedIndicator.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         setLocationButton();
         setseekbar( );
@@ -97,7 +140,8 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
     public void setseekbar( ){
         seek_bar = (SeekBar)findViewById(R.id.seekbar);
         text_view_radius =(TextView)findViewById(R.id.radius);
-        text_view_radius.setText("0KM");
+        text_view_radius.setText("0m");
+
 
         seek_bar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -106,9 +150,11 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         progress_value = progress;
-                        text_view_radius.setText("" + progress+"KM");
+                        mCircleRadius=progress;
+                        text_view_radius.setText("" + progress+"m");
                         // Drawing circle on the map
                         drawCircle(mMyLocation,progress);
+
                     }
 
                     @Override
@@ -117,7 +163,7 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
-                        text_view_radius.setText("" + progress_value+"KM");
+                        text_view_radius.setText("" + progress_value+"m");
                     }
                 }
         );
@@ -154,6 +200,11 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerDragListener(this);
+        mMap.setOnMapLongClickListener(this);
+        mMap.setOnMapClickListener(this);
+        //create initial marker
+
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -208,6 +259,15 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         mLastLocation=location;
         // Creating a LatLng object for the current location
         LatLng latLng= new LatLng(location.getLatitude(),location.getLongitude());
+        if(mMarkerInitial==null){
+            mMarkerInitial=mMap.addMarker( new MarkerOptions()
+                    .position(latLng)
+                    .title("Location")
+                    .snippet("First Marker"));
+            mMarkerInitial.showInfoWindow();
+        }
+
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
     }
@@ -262,5 +322,53 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
+    }
+
+    @Override
+    public void onMarkerDrag(Marker arg0) {
+        // TODO Auto-generated method stub
+        mMyLocation=marker.getPosition();
+        drawCircle(mMyLocation,mCircleRadius);
+
+    }
+
+    @Override
+    public void onMarkerDragEnd(Marker arg0) {
+        mMyLocation=marker.getPosition();
+        // TODO Auto-generated method stub
+        drawCircle(mMyLocation,mCircleRadius);
+        LatLng dragPosition = arg0.getPosition();
+        double dragLat = dragPosition.latitude;
+        double dragLong = dragPosition.longitude;
+        Log.i("info", "on drag end :" + dragLat + " dragLong :" + dragLong);
+        Toast.makeText(getApplicationContext(), "Marker Dragged..!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onMarkerDragStart(Marker arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onMapClick(LatLng arg0) {
+        // TODO Auto-generated method stub
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+    }
+
+
+    @Override
+    public void onMapLongClick(LatLng arg0) {
+        // TODO Auto-generated method stub
+        if (marker!=null){
+            marker.remove();
+        }
+        //create new marker when user long clicks
+        marker=mMap.addMarker(new MarkerOptions()
+                .position(arg0)
+                .draggable(true));
+        mMarkerInitial.remove();
+        mMyLocation=marker.getPosition();
+
     }
 }

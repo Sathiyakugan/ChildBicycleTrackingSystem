@@ -27,4 +27,5 @@
     <string name="title_activity_set__location">Set_Location</string>
     <string name="title_activity_speed_changer">speed_changer</string>
     <string name="adjust_bicycle_speed">Adjust Bicycle Speed</string>
+    <string name="title_activity_speed_indicator">SpeedIndicator</string>
 </resources>

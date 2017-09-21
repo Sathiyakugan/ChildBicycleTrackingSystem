@@ -48,6 +48,10 @@
         <activity
             android:name=".speed_changer"
             android:label="@string/title_activity_speed_changer"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SpeedIndicator"
+            android:label="@string/title_activity_speed_indicator"
             android:theme="@style/AppTheme"></activity>
     </application>
 
