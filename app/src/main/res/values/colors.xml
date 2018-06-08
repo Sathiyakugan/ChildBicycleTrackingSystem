@@ -11,7 +11,7 @@
     <color name="colorPrimary">#33b5e5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="cancelorange">#ffd54f</color>
 
     <color name="safe_mode_text">#80ffffff</color>
     <color name="white">#ffffffff</color>

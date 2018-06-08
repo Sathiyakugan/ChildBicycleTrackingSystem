@@ -1,9 +1,11 @@
 package com.blogspot.gihanmora.childbicycletrackingsystem;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -21,6 +24,8 @@ import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -39,7 +44,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 public class SetLocation extends AppCompatActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener ,GoogleMap.OnMarkerDragListener,GoogleMap.OnMapLongClickListener,GoogleMap.OnMapClickListener {
     protected static final String TAG = "Customer Map Activity";
     private GoogleApiClient mGoogleApiClient;
@@ -55,20 +59,50 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
     private Marker mMarkerInitial;
     private int mCircleRadius=10;
     private Button mButtonSpeedIndicator;
+    com.github.clans.fab.FloatingActionMenu materialDesignFAM;
+    com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4, floatingActionButton5, floatingActionButton6;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_location);
+
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.social_floating_menu);
+        floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.speed);
+        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.tip);
+        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.help);
+        materialDesignFAM.bringToFront();
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu first item clicked
+                Intent intent =new Intent(SetLocation.this,SpeedIndicator.class);
+                startActivity(intent);
+
+            }
+        });
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu second item clicked
+
+
+            }
+        });
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO something when floating action menu third item clicked
+
+            }
+        });
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
         mButtonSpeedIndicator= (Button) findViewById(R.id.SpeedIndicator);
         mButtonSpeedIndicator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +117,83 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         setseekbar( );
 
     }
+    public static Intent getOpenFacebookIntent(Context context) {
 
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0); //Checks if FB is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("fb://page/376227335860239")); //Trys to make intent with FB's URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.facebook.com/karthikofficialpage")); //catches and opens a url to the desired page
+        }
+    }
+
+    public static Intent getOpenTwitterIntent(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.twitter.android", 0); //Checks if Twitter is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://twitter.com/drkarthiik")); //Trys to make intent with Twitter's's URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://twitter.com/drkarthiik")); //catches and opens a url to the desired page
+        }
+    }
+
+    public static Intent getOpenLinkdinIntent(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.linkedin.android", 0); //Checks if Linkdin is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.linkedin.com/in/karthikm128")); //Trys to make intent with Linkdin's URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.linkedin.com/in/karthikm128")); //catches and opens a url to the desired page
+        }
+    }
+
+    public static Intent getOpenGPlusIntent(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.google.android.apps.plus", 0); //Checks if G+ is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://plus.google.com/u/0/+KarthikM128")); //Trys to make intent with G+'s URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://plus.google.com/u/0/+KarthikM128")); //catches and opens a url to the desired page
+        }
+    }
+
+    public static Intent getOpenInstagramIntent(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.instagram.android", 0); //Checks if Instagram is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.instagram.com/accounts/login/")); //Trys to make intent with Instagram's URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.instagram.com/accounts/login/")); //catches and opens a url to the desired page
+        }
+    }
+
+    public static Intent getOpenYouTubeIntent(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.google.android.youtube", 0); //Checks if YT is even installed.
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.youtube.com/karthikm128")); //Trys to make intent with YT's URI
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.youtube.com/karthikm128")); //catches and opens a url to the desired page
+        }
+    }
     private void setLocationButton() {
         mLocationSetButton=(Button)findViewById(R.id.setlocationbtn);
         mLocationSetButton.setOnClickListener(new View.OnClickListener() {
@@ -113,10 +223,27 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
     }
 
     public void setseekbar( ){
+
+
+
         seek_bar = (SeekBar)findViewById(R.id.seekbar);
         text_view_radius =(TextView)findViewById(R.id.radius);
         text_view_radius.setText("0m");
+        seek_bar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
 
+                Toast.makeText(getApplicationContext(),"Set the Location by dragging it",
+                        Toast.LENGTH_SHORT).show();
+                if(mMyLocation!=null){
+                    return true;
+                }
+                else{
+                    return  false;
+                }
+
+            }
+        });
 
         seek_bar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -205,8 +332,9 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
-            return true;
+//            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+//            startActivity(settingsIntent);
+//            return true;
         }
         else if (id == R.id.signOut) {
             FirebaseAuth.getInstance().signOut();
@@ -315,7 +443,11 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         LatLng dragPosition = arg0.getPosition();
         double dragLat = dragPosition.latitude;
         double dragLong = dragPosition.longitude;
+
         Log.i("info", "on drag end :" + dragLat + " dragLong :" + dragLong);
+        if(!seek_bar.isActivated()){
+            seek_bar.setActivated(true);
+        }
         Toast.makeText(getApplicationContext(), "Marker Dragged..!", Toast.LENGTH_LONG).show();
     }
 
@@ -346,4 +478,6 @@ public class SetLocation extends AppCompatActivity implements  OnMapReadyCallbac
         mMyLocation=marker.getPosition();
 
     }
+
+
 }

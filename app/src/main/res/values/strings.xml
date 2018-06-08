@@ -19,13 +19,27 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main__menu">Select Item</string>
+    <string name="title_activity_main__menu">CSS</string>
     <string name="signout">SignOut</string>
     <string name="km_sample">2.3 km</string>
-    <string name="adjust_child_playing_area">Adjust Child playing area</string>
+    <string name="adjust_child_playing_area">Adjust Child Playing area</string>
     <string name="set">Set</string>
+    <string name="notificationtext">notificationtext fdbdbdfndfbndndgn</string>
+
     <string name="title_activity_set__location">Set_Location</string>
     <string name="title_activity_speed_changer">speed_changer</string>
     <string name="adjust_bicycle_speed">Adjust Bicycle Speed</string>
     <string name="title_activity_speed_indicator">SpeedIndicator</string>
+
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Speed Changer</string>
+
+    <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30] -->
+    <string name="settings_Maximum_Speed_label">Maximum Speed</string>
+    <string name="settings_Max_Speed" translatable="false">Max_Speed</string>
+    <string name="settings_speed_default_value" translatable="false">20</string>
+    <string name="title_activity_speed_change">SpeedChange</string>
+    <string name="title_activity_customer">Customer</string>
 </resources>

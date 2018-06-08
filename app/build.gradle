@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.blogspot.gihanmora.childbicycletrackingsystem"
         minSdkVersion 19
@@ -51,24 +51,24 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$firebaseVersion"
 
     //Add Swag circele Scorrol to the app
+    compile 'com.github.clans:fab:1.6.2'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.firebase:geofire-android:2.1.1'
     compile 'com.firebaseui:firebase-ui-auth:0.6.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
+
     compile 'com.github.JesusM:HoloCircleSeekBar:v2.2.2'
     compile 'com.github.anastr:speedviewlib:1.1.6'
-    testCompile 'junit:junit:4.12'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    compile 'com.sothree.slidinguppanel:library:3.2.1'
+    compile 'com.sdsmdg.harjot:croller:1.0.5'
+    testCompile 'junit:junit:4.12'
+    compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'org.adw.library:discrete-seekbar:1.0.1'
+
+
 }
-
-
-
-
-
-
-
-
 apply plugin: 'com.google.gms.google-services'

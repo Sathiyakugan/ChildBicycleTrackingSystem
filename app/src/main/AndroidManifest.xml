@@ -46,12 +46,23 @@
             android:label="@string/title_activity_main__menu"
             android:theme="@style/AppTheme.Teal" />
         <activity
-            android:name=".speed_changer"
-            android:label="@string/title_activity_speed_changer"
-            android:theme="@style/AppTheme" />
+            android:name=".SettingsActivity"
+            android:label="@string/settings_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SetLocation" />
+        </activity>
         <activity
             android:name=".SpeedIndicator"
             android:label="@string/title_activity_speed_indicator"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SpeedChange"
+            android:label="@string/title_activity_speed_change"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Customer"
+            android:label="@string/title_activity_customer"
             android:theme="@style/AppTheme"></activity>
     </application>
 

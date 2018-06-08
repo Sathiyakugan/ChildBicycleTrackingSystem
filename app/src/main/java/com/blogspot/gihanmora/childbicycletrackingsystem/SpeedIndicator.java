@@ -1,6 +1,8 @@
 package com.blogspot.gihanmora.childbicycletrackingsystem;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -42,23 +44,30 @@ public class SpeedIndicator extends AppCompatActivity {
         awesomeSpeedometer.setMaxSpeed(100);
         // change speed to 140 Km/h
         awesomeSpeedometer.speedTo(0);
-        gauge.speedTo(50,500);
+        gauge.speedTo(0,500);
         mSpeedTextview= (TextView) findViewById(R.id.speedText);
         mSpeedTextview.setText(awesomeSpeedometer.getSpeed()+"Km/h");
 
         FirebaseUser user=mFirebaseAuth.getCurrentUser();
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Customer").child(user.getUid()).child("Speed");
-
-        // Read from the database
-        rootRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference bikeRef = FirebaseDatabase.getInstance().getReference().child("bike").child("status");
+        bikeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                dataSnapshot.getValue();
-                mSpeedTextview.setText(dataSnapshot.getValue()+"Km/h");
-                gauge.speedTo(Integer.parseInt(dataSnapshot.getValue().toString()),500);
 
+                String status = dataSnapshot.getValue().toString();
+                if(status.length()>17){
+                    try {
+                        int childSpeed =Integer.parseInt(status.substring(18))/100;
+                        awesomeSpeedometer.speedTo(childSpeed);
+                        mSpeedTextview.setText(childSpeed+"Km/h");
+                        gauge.speedTo(Float.parseFloat(childSpeed+""),500);
+                        if(childSpeed>15){
+                            Showalert("Your Child is Exceeding the speed Limit");
+                        }
+
+                    } catch (Exception e) {
+                    }
+                }
             }
 
             @Override
@@ -66,6 +75,19 @@ public class SpeedIndicator extends AppCompatActivity {
                 // Failed to read value
             }
         });
+    }
+
+    public void Showalert(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(SpeedIndicator.this);
+        builder.setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }

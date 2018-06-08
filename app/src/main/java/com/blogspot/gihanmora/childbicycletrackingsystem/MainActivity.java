@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
                                     .setIsSmartLockEnabled(false)
                                     .setProviders(
                                             AuthUI.EMAIL_PROVIDER,
-                                            AuthUI.GOOGLE_PROVIDER,
-                                            AuthUI.FACEBOOK_PROVIDER).setTheme(R.style.loginUI).setLogo(R.drawable.logo)
+                                            AuthUI.GOOGLE_PROVIDER).setTheme(R.style.loginUI).setLogo(R.drawable.logo)
                                     .build(),
                             RC_SIGN_IN);
                 }
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     private void onSignedInInitialize(String username) {
         mUsername = username;
         addDrtailsToDatabase();
-        Intent intent =new Intent(MainActivity.this,SetLocation.class);
+        Intent intent =new Intent(MainActivity.this,Main_Menu.class);
         startActivity(intent);
         finish();
         return;
