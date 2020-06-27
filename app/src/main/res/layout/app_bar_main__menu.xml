@@ -84,7 +84,7 @@
         <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
             android:id="@+id/sliding_layout"
             android:layout_width="match_parent"
-            android:layout_height="820dp"
+            android:layout_height="match_parent"
             android:gravity="bottom"
             sothree:umanoDragView="@+id/dragView"
             sothree:umanoOverlay="true"
@@ -212,30 +212,6 @@
         </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
     </RelativeLayout>
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/notsit"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:padding="@dimen/action_button_margin"-->
-        <!--android:visibility="gone"-->
-        <!--android:background="@color/material_teal_400">-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@drawable/bicycle"/>-->
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textColor="@color/material_orange_a400"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="18dp"-->
-            <!--android:text="Child Is Not Using The Bicycle" />-->
-
-    <!--</LinearLayout>-->
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
