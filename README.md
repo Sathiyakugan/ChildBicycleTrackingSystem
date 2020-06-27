@@ -10,10 +10,10 @@ Child Bicycle Tracking System is IOT solution which let parent to monitor their 
     This is detected from tilt sensor. If bicycle is fallen immediately a notification goes to the parent.
 - [x] Track Bicycle Speed.
     Speed is calculated using the GPS coordinates and it is displayed real-time in the android application. Not only that, maximum speed can be defined and if child exceeds that both child and parent will be alerted.
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+![](/docs/resources/speedindicator.png)
 - [x] Identify exactly where the child is playing to ensure the safety.
     Child playing location is displayed in a map in the application. It is also dynamically updated when child is moving. GPS locator is used to get the location.
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+![](/docs/resources/childplayareas.png)
 - [x] Set up safe zones and receive alerts when children go beyond them.
     Parent get the privilege to draw regions in the map and from that can monitor whether child go beyond them through application.
 - [x] Automatic call feature by button press.
@@ -34,11 +34,11 @@ Want to contribute? Great!
 
 You need to create your own firebase project and replace the `google-services.json`
 Create a databse in firebase as shown in the picture.
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+![](/docs/resources/firebase.png)
 Now you are good to go.
 
 Here is how to test your app with only the Firebase.
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+![](/docs/resources/demo.gif)
 
 If you wanted to work with the hardware and with the live data products to test your product you need to setup Ardino and Ardino firbase library.
 
